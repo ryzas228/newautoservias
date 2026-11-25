@@ -9,18 +9,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1c1b19;--panel:#262420;--line:#3a3731;--ink:#f1ece2;--mute:#a49d90;--ochre:#dba51f;--red:#d2482d;--blue:#4f8fd6;
+:root{--bg:#090b10;--panel:#11141b;--line:#232836;--ink:#eef0f4;--mute:#9aa2b2;--ochre:#f2b01e;--red:#d2482d;--blue:#4f8fd6;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
 html{scroll-padding-top:72px;background:var(--bg)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Barlow,system-ui,sans-serif;overflow-x:hidden}
+body{margin:0;background:transparent;color:var(--ink);font:400 17px/1.6 Barlow,system-ui,sans-serif;overflow-x:hidden}
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
 a{color:inherit}
 h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;line-height:.95;margin:0;letter-spacing:.01em}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 :focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
 
-header{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(28,27,25,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(9,11,16,.72);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{font:700 22px "Barlow Condensed",sans-serif;text-decoration:none;display:flex;gap:10px;align-items:center}
 .logo i{width:12px;height:12px;background:var(--ochre);border-radius:50%;box-shadow:0 0 0 4px rgba(219,165,31,.2)}
@@ -88,7 +88,7 @@ h2{font-size:clamp(40px,6vw,76px);margin-bottom:48px;max-width:14ch}
 .contact .btn:hover{background:#1c1b19;color:var(--ochre)}
 footer{padding:26px 0;color:var(--mute);font-size:14px}
 button.call{border:0;font:inherit;font-size:15px;font-weight:500;cursor:pointer}
-.card img{display:block;width:calc(100% + 60px);height:190px;margin:-34px -30px 24px;object-fit:contain;background:#14130f}
+.card img{display:block;width:calc(100% + 60px);height:190px;margin:-34px -30px 24px;object-fit:contain;background:#0b0d12}
 .mimg{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;margin-bottom:22px}
 .shot{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:6px;margin-top:44px}
 #darbaiView{padding-top:130px}
@@ -134,9 +134,55 @@ html.ld,html.ld body{overflow:hidden}
 .dial .needle{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
 .dial .hub{fill:var(--ochre)}
 @media(max-width:760px){.dial{opacity:.25;right:-140px}}
+
+html{background:var(--bg)}
+.bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(55vmax 48vmax at 88% -8%,rgba(52,96,190,.42),transparent 62%),
+radial-gradient(48vmax 44vmax at -8% 42%,rgba(242,176,30,.14),transparent 62%),
+radial-gradient(52vmax 48vmax at 72% 108%,rgba(120,64,180,.26),transparent 62%),var(--bg);
+background-size:125% 125%;animation:drift 24s ease-in-out infinite alternate}
+.bgfx::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 28%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 28%,#000 15%,transparent 72%)}
+@keyframes drift{to{background-position:14% 10%,0 0,0 0,0 0}}
+@media(prefers-reduced-motion:reduce){.bgfx{animation:none}}
+.burger{display:none;width:44px;height:44px;border:0;background:none;color:var(--ink);cursor:pointer;position:relative;flex:none}
+.burger i{position:absolute;left:11px;right:11px;height:2px;background:currentColor;transition:transform .3s,top .3s}
+.burger i:nth-child(1){top:16px}.burger i:nth-child(2){top:26px}
+body.mo .burger i:nth-child(1){top:21px;transform:rotate(45deg)}
+body.mo .burger i:nth-child(2){top:21px;transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:15;background:rgba(9,11,16,.97);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 28px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+body.mo .menu{opacity:1;visibility:visible}
+.menu a{font:700 clamp(52px,16vw,80px)/1.1 "Barlow Condensed",sans-serif;text-decoration:none}
+.menu a:active{color:var(--ochre)}
+@media(min-width:761px){.menu{display:none}}
+@media(max-width:760px){
+ .burger{display:block}
+ body{font-size:16px}
+ .wrap{padding:0 20px}
+ header .wrap{height:60px;gap:8px}
+ .call{margin-left:auto;padding:8px 14px}
+ .hero{padding:92px 0 48px}
+ .hero h1{font-size:clamp(46px,14vw,72px);max-width:none}
+ .hero p{font-size:17px;margin:20px 0 26px}
+ .dial{width:130vw;right:-30vw;opacity:.2}
+ .rate{gap:22px 34px;margin-top:40px}.rate b{font-size:36px}
+ section{padding:72px 0}
+ h2{margin-bottom:32px}
+ .card{padding:28px 24px 32px}
+ .card img{width:calc(100% + 48px);margin:-28px -24px 20px;height:170px}
+ .card h3,.more h3{font-size:30px}
+ .more{margin-top:44px;gap:36px}
+ .gal{columns:2 120px;column-gap:10px}.gal figure{margin-bottom:10px}
+ .gcta p{font-size:28px}
+ .contact .cols{gap:28px}
+ .dlg-in a{font-size:40px}
+ .marquee span{font-size:21px;padding:13px 20px}
+ .shot{max-height:240px;margin-top:32px}
+ #darbaiView{padding-top:100px}
+}
 </style>
 </head>
 <body>
+<div class="bgfx"></div>
 <div class="pre" id="pre"><small>Diagnostika</small><b id="preN">0</b><i><span id="preB"></span></i></div>
 <div class="bar"></div>
 <header>
@@ -144,8 +190,10 @@ html.ld,html.ld body{overflow:hidden}
     <a class="logo" href="#top"><i></i>Partizanų 49A</a>
     <nav><a href="#paslaugos">Paslaugos</a><a href="#darbai">Darbai</a><a href="#kontaktai">Kontaktai</a></nav>
     <button class="call" type="button" data-call>Skambinti</button>
+    <button class="burger" type="button" aria-label="Meniu"><i></i><i></i></button>
   </div>
 </header>
+<div class="menu" id="menu"><a href="#paslaugos">Paslaugos</a><a href="#darbai">Darbai</a><a href="#kontaktai">Kontaktai</a></div>
 
 <main id="top">
 <div id="homeView">
@@ -332,8 +380,9 @@ html.ld,html.ld body{overflow:hidden}
     go(el,was);
   }
   document.addEventListener("click",function(e){
+    if(e.target.closest(".burger")){ document.body.classList.toggle("mo"); return; }
     var a=e.target.closest('a[href^="#"]');
-    if(a){ e.preventDefault(); var href=a.getAttribute("href"); if(href!==location.hash) history.pushState(null,"",href); route(); return; }
+    if(a){ document.body.classList.remove("mo"); e.preventDefault(); var href=a.getAttribute("href"); if(href!==location.hash) history.pushState(null,"",href); route(); return; }
     if(e.target.closest("[data-call]")){ dlg.showModal(); }
     else if(e.target===dlg||e.target.closest("[data-close]")){ dlg.close(); }
   });
